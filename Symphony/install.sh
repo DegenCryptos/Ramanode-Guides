@@ -81,8 +81,8 @@ EOF
   symphonyd config chain-id symphony-testnet-3
   symphonyd config keyring-backend test
   symphonyd init $MONIKER --chain-id symphony-testnet-3
-  wget -O $HOME/.symphonyd/config/addrbook.json https://files.ramanode.top/testnet/symphony/addrbook.json
-  wget -O $HOME/.symphonyd/config/genesis.json https://files.ramanode.top/testnet/symphony/genesis.json
+  wget -O $HOME/.symphonyd/config/addrbook.json https://files.shazoe.xyz/testnets/symphony/addrbook.json
+  wget -O $HOME/.symphonyd/config/genesis.json https://files.shazoe.xyz/testnets/symphony/genesis.json
   PEERS="$(curl -sS https://symphony-testnet-rpc.ramanode.top/net_info | jq -r '.result.peers[] | "\(.node_info.id)@\(.remote_ip):\(.node_info.listen_addr)"' | awk -F ':' '{print $1":"$(NF)}' | sed -z 's|\n|,|g;s|.$||')"
   sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.symphonyd/config/config.toml
   sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0note\"|" $HOME/.symphonyd/config/app.toml
